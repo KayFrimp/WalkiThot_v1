@@ -1,0 +1,7 @@
+# .gitignore
+
+# Ignore the virtual environment directory
+venv/
+
+# Ignore Pycache and all subdirectories and files
+**/__pycache__
