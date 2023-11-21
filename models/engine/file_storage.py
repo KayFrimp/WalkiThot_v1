@@ -3,7 +3,7 @@
 import json
 from models.user import User
 from models.comment import Comment
-from models.blog import Categories, Blog
+from models.blog import Category, Blog
 from models.response import Response
 from models.base_model import BaseModel
 
