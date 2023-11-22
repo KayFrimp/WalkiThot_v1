@@ -10,6 +10,8 @@ class Comment(BaseModel):
         blog_id (string): Foreign key (blog.id)
         comment (string): Any comment under a blog post
     """
-
     blog_id = ""
     comment = ""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

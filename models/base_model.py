@@ -3,6 +3,8 @@
 from datetime import datetime
 import uuid
 
+import models
+
 
 class BaseModel:
     """BaseModel Class:
@@ -13,9 +15,9 @@ class BaseModel:
         update_at (datetime): date updated
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         """Initializes the BaseModel class
-    
+
         Args:
             **kwargs (dictionary): contains all arguments by key/value
         """
@@ -37,6 +39,8 @@ class BaseModel:
     def save(self):
         """Updates public instance attribute update_at with current datetime"""
         self.updated_at = datetime.now()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary of all keys/values of
@@ -49,3 +53,7 @@ class BaseModel:
                 instance_dict[key] = value
         instance_dict['__class__'] = self.__class__.__name__
         return instance_dict
+
+    def delete(self):
+        """delete the current instance from the storage"""
+        models.storage.delete(self)

@@ -32,3 +32,6 @@ class Blog(BaseModel):
     title = ""
     type = None
     content = ""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
