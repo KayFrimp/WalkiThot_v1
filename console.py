@@ -1,7 +1,9 @@
 #!venv/bin/python3
 """Console Module"""
 import cmd
+# shlex is for splitting the line along spaces except in double quotes
 import shlex
+
 import sys
 import models
 
@@ -64,13 +66,7 @@ class WalkiThotCMD(cmd.Cmd):
                 if value[0] == value[-1] == '"':
                     value = shlex.split(value)[0].replace('_', ' ')
                 else:
-                    try:
-                        value = int(value)
-                    except Exception:
-                        try:
-                            value = float(value)
-                        except Exception:
-                            continue
+                    value = eval(value)
                 new_dict[key] = value
         return new_dict
 
@@ -84,7 +80,7 @@ class WalkiThotCMD(cmd.Cmd):
             return False
         if args[0] in classes:
             attributes = self._key_value_parser(args[1:])
-            obj = classes[args[0]](attributes)
+            obj = classes[args[0]](**attributes)
         else:
             print("** class doesn't exist **")
             return False
