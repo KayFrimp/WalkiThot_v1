@@ -62,13 +62,15 @@ class BaseModel:
         models.storage.new(self)
         models.storage.save()
 
-    def to_dict(self):
+    def to_dict(self, save_to_disk=False):
         """Returns a dictionary of all keys/values of
         __dict__ of the instance"""
         instance_dict = {}
         for key, value in self.__dict__.items():
             if key == 'created_at' or key == 'updated_at':
                 instance_dict[key] = value.isoformat()
+            elif key == 'password' and not save_to_disk:
+                continue
             else:
                 instance_dict[key] = value
         instance_dict['__class__'] = self.__class__.__name__
