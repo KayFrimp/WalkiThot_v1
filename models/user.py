@@ -1,5 +1,6 @@
 #!venv/bin/python3
 """ This is a user class definition """
+import hashlib
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import mapped_column, relationship
 import models
@@ -36,3 +37,9 @@ class User(BaseModel, Base):
                 if blog.user_id == self.id:
                     blog_list.append(blog)
             return blog_list
+
+    def __setattr__(self, key, value):
+        """Sets user password with MD5 Hashing"""
+        if key == 'password':
+            value = hashlib.md5(value.encode()).hexdigest()
+        super().__setattr__(key, value)
