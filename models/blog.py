@@ -1,10 +1,15 @@
 #!venv/bin/python3
 """Blog Class Module"""
-from models.base_model import BaseModel
-from enum import Enum
+from sqlalchemy import Enum, ForeignKey, LargeBinary, String, Text
+from sqlalchemy.orm import mapped_column, relationship
+import models
+from models.base_model import BaseModel, Base
+from enum import Enum as PyEnum
+
+from models.comment import Comment
 
 
-class Category(Enum):
+class Category(PyEnum):
     """
     Enumeration representing categories for blog posts.
 
@@ -21,7 +26,7 @@ class Category(Enum):
     OTHER = "Other..."
 
 
-class Blog(BaseModel):
+class Blog(BaseModel, Base):
     """Blog Class Definition
 
     Attributes:
@@ -29,9 +34,34 @@ class Blog(BaseModel):
         type (Category): Category blog post falls under
         content (string): Blog post
     """
-    title = ""
-    type = None
-    content = ""
+    if models.storage_t == 'db':
+        __tablename__ = 'blogs'
+        user_id = mapped_column(String(60),
+                                ForeignKey('users.id'), nullable=False)
+        title = mapped_column(String(255), nullable=False)
+        type = mapped_column(Enum(Category), default=Category.OTHER,
+                             nullable=False)
+        content = mapped_column(Text, nullable=False)
+        image = mapped_column(LargeBinary, nullable=True)
+        user = relationship("User", back_populates="blogs")
+        comments = relationship("Comment", back_populates="blog")
+    else:
+        user_id = ""
+        title = ""
+        type: Category = None
+        content = ""
+        image = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    if models.storage_t != "db":
+        @property
+        def comments(self):
+            """getter for list of Comment instances related to the blog"""
+            comment_list = []
+            all_comments = models.storage.all(Comment)
+            for comment in all_comments.values():
+                if comment.blog_id == self.id:
+                    comment_list.append(comment)
+            return comment_list

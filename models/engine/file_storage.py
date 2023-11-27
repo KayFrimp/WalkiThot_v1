@@ -3,7 +3,7 @@
 import json
 from models.user import User
 from models.comment import Comment
-from models.blog import Category, Blog
+from models.blog import Blog
 from models.response import Response
 from models.base_model import BaseModel
 
@@ -72,3 +72,30 @@ class FileStorage:
 
         except Exception:
             pass
+
+    def delete(self, obj=None):
+        """delete obj from __objects if it’s inside"""
+        if obj is not None:
+            key = obj.__class__.__name__ + '.' + obj.id
+            if key in self.__objects:
+                del self.__objects[key]
+
+    def close(self):
+        """call reload() method for deserializing the JSON file to objects"""
+        self.reload()
+
+    def get(self, cls, id):
+        """Returns the object based on the class and id or None if not found"""
+        if cls in classes.values():
+            objs = self.all(cls)
+            for value in objs.values():
+                if value.id == id:
+                    return value
+        return None
+
+    def count(self, cls=None):
+        """Returns number of objects in storage matching given class"""
+        objs = {}
+        if cls is None or cls in classes.values():
+            objs = self.all(cls)
+        return len(objs)
