@@ -1,37 +1,37 @@
-<!-- Custom styling -->
-<link rel="stylesheet" type="text/css" href="static/styles.css">
 
-<!-- HTML signup Forms-->
-<form action="signup.php" method="Get" style="margin-top: 100px">
-	<div>
-		<label>First Name</label>
-		<input type="text" name="firstName" placeholder="Enter your firstname">
-	</div>
-    <div>
-		<label>Last Name</label>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <title>Signup Page</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Create an Account</h2>
+        <form id="signupForm">
+			<label>First Name</label>
+			<input type="text" name="firstName" placeholder="Enter your firstname">
+			<label>Last Name</label>
 		<input type="text" name="lastName" placeholder="Enter your lastname">
-	</div>
-	<br>
-	<div>
-		<label>Username</label>
-		<input type="text" name="userName">
-	</div>
-	<br>
-	<div>
-		<label>Email</label>
-		<input type="Email" name="email">
-	</div>
-	<br>
-	<div>
-	<label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-	</div>
-	<br>
-	<div>
-		<label for=" confirm password">Confirm Password:</label>
-			<input type="confirmpassword" id="confirmpassword" name="Confirm password" required>
-		</div>
-		<br>
-	<input type="submit" name="submit" value="sign up">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-</form>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            <button type="submit" onclick="validateForm()">Sign Up</button>
+        </form>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>

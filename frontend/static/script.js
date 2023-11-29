@@ -6,7 +6,7 @@ function showSidebar() {
 
 // Function to toggle the mobile menu
 function toggleMenu() {
-    var nav = document.querySelector('header ul');
+    var nav = document.querySelector('header nav ul');
     nav.classList.toggle('show');
 }
 
@@ -44,3 +44,62 @@ $('.post-wrapper').slick({
         }
     ]
 });
+
+/* login page */
+function validateForm() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    // Perform AJAX request to the server for login validation
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        if (data.success) {
+            alert('Login successful!');
+            // You can redirect the user or perform other actions after successful login
+        } else {
+            alert('Login failed. Please check your username and password.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+/* signup page */
+function validateForm() {
+    var username = document.getElementById('username').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Perform any additional client-side validation if needed
+
+    // Perform AJAX request to the server for signup
+    fetch('/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password, confirmPassword }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        if (data.success) {
+            alert('Signup successful!');
+            // You can redirect the user or perform other actions after successful signup
+        } else {
+            alert('Signup failed. Please check your information.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}

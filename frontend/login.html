@@ -1,19 +1,26 @@
-<!-- Custom styling -->
-<link rel="stylesheet" type="text/css" href="static/styles.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm" onsubmit="validateForm(event)">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            <br>
 
-<!--login form -->
-    <form action="login.php" method="post" style="margin-top: 100px">
-        <div>
-        <label for="email">Email:</label>
-        <input type="text" id="username" name="username" required>
-        </div>
-        <br>
-        <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        </div>
-        <br>
-        <button type="submit">Login</button>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
 
-    </form>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 
+    <script src="static/script.js"></script>
+</body>
+</html>
