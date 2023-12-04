@@ -9,7 +9,7 @@ from enum import Enum as PyEnum
 from models.comment import Comment
 
 
-class Category(PyEnum):
+class Category(str, PyEnum):
     """
     Enumeration representing categories for blog posts.
 
@@ -44,7 +44,8 @@ class Blog(BaseModel, Base):
         content = mapped_column(Text, nullable=False)
         image = mapped_column(LargeBinary, nullable=True)
         user = relationship("User", back_populates="blogs")
-        comments = relationship("Comment", back_populates="blog")
+        comments = relationship("Comment", back_populates="blog",
+                                cascade='all, delete-orphan')
     else:
         user_id = ""
         title = ""
