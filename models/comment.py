@@ -19,7 +19,8 @@ class Comment(BaseModel, Base):
         blog_id = mapped_column(String(60),
                                 ForeignKey('blogs.id'), nullable=False)
         comment = mapped_column(String(255), nullable=False)
-        responses = relationship("Response", back_populates="comment")
+        responses = relationship("Response", back_populates="comment",
+                                 cascade='all, delete-orphan')
         blog = relationship("Blog", back_populates="comments")
     else:
         blog_id = ""
@@ -29,11 +30,11 @@ class Comment(BaseModel, Base):
         super().__init__(*args, **kwargs)
 
     if models.storage_t != 'db':
-        def reponses(self):
+        def responses(self):
             """getter for list of Response instances related to the comment"""
             response_list = []
             all_responses = models.storage.all(Response)
             for response in all_responses.values():
                 if response.comment_id == self.id:
-                    response_list.append(Response)
+                    response_list.append(response)
             return response_list
