@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 
 app = Flask(__name__)
@@ -34,6 +34,15 @@ def write():
 @app.route("/forgotpassword")
 def forgotpassword():
     return render_template("forgotpassword.html")
+
+@app.route('/login-data', methods=["POST"], strict_slashes=False)
+def login_data():
+    """return hello"""
+    response=request.form.to_dict()
+    print(response)
+    return ("Welcome")
+
+
 
 if __name__  ==  "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
