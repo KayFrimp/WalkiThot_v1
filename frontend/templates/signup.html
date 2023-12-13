@@ -1,62 +1,37 @@
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="static/styles.css">
-    <link rel="stylesheet" type="text/css" href="static/signupstyles.css">
-    <title>Signup Page</title>
+    <title>Walkithot</title>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <div class="logo">
-                <h1><span class="walki">Walki</span><span class="thot">Thot</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Story</a></li>
-                    <li><a href="signup.html">Signup</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li>
-                        <a href="#">Write</a>
-                    </li>
-                </ul>
-            </nav>
+    {% extends "index.html" %}
+    {% block content %}
+
+        <div class="containerlogin">
+            <h2>Create an Account</h2>
+            <form id="signupForm">
+                <label>First Name</label>
+                <input type="text" name="firstName" placeholder="Enter your firstname">
+                <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Enter your lastname">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+    
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+    
+                <button type="submit" onclick="validateForm()">Sign Up</button>
+            </form>
+            <p class="center">
+                <small>Already have an account? <a href="login.html">Log In</a></small>
+            </p>
         </div>
-        <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
-    
-    </header>
-    
-    <div class="container">
-        <h2>Create an Account</h2>
-        <form id="signupForm">
-			<label>First Name</label>
-			<input type="text" name="firstName" placeholder="Enter your firstname">
-			<label>Last Name</label>
-		<input type="text" name="lastName" placeholder="Enter your lastname">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" required>
-
-            <button type="submit" onclick="validateForm()">Sign Up</button>
-        </form>
-        <p class="center">
-            <small>Already have an account? <a href="login.html">Log In</a></small>
-        </p>
-    </div>
-
-    <script src="static/script.js"></script>
-</body>
+        {% endblock %}
+    </body>
 </html>

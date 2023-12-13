@@ -1,0 +1,71 @@
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 80px auto 20px; /* Increased top margin to accommodate the navigation bar */
+    padding: 20px;
+    background-color: #FFF; /* White background for the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* About Section styles */
+#about-section {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+#about-section h2 {
+    color: #333;
+    margin-bottom: 20px; 
+}
+
+#about-section p {
+    margin-bottom: 15px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #1E1E1E; /* Dark background color for the footer */
+    color: #FFF; /* White text color */
+    padding: 10px;
+    text-align: center;
+}
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px auto; /* Adjust top and bottom margins for smaller screens */
+        padding: 10px;
+    }
+
+    #about-section h2 {
+        font-size: 1.5rem; /* Adjust heading font size for smaller screens */
+        margin-bottom: 10px;
+    }
+
+    #about-section p {
+        font-size: 1rem; /* Adjust paragraph font size for smaller screens */
+        margin-bottom: 10px;
+    }
+
+    footer {
+        font-size: 0.8rem; /* Adjust footer text size for smaller screens */
+    }
+
+    header {
+        position: relative; 
+    }
+
+    .menu-toggle {
+        z-index: 1;
+    }
+}

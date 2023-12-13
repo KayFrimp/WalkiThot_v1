@@ -1,66 +1,48 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="static/styles.css">
-    <link rel="stylesheet" type="text/css" href="static/loginstyles.css">
-    <title>Login Page</title>
+    <title>Walkithot</title>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <div class="logo">
-                <h1><span class="walki">Walki</span><span class="thot">Thot</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Story</a></li>
-                    <li><a href="signup.html">Signup</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li>
-                        <a href="#">Write</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
-
-    </header>
-
-    <div class="container">
-        <form action="#" method="post" class="admin-form auth-form">
-            <h1 class="center form=title">Login</h1>
-
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required class="input-control">
-            </div>
-            <div class="input-group">
-                <div class="forgot-password-wrapper">
-                <label for="password">Password:</label>
-                <small><a href="forgot_password.html">Forgot Password?</a></small>
+    {% extends "index.html" %}
+    {% block content %}
+    
+        <div class="containerlogin">
+            <form action="#" method="post" class="admin-form auth-form">
+                <h1 class="center form=title">Login</h1>
+    
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" required class="input-control">
                 </div>
-                <input type="password" id="password" name="password" required class="input-control">
-            </div>
-            <div class="input-group">
-                <label for="remember-me">
-                    <input type="checkbox" name="remember-me" id="remember-me">
-                        Remember me
-                    </label>
-            </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    
+                    
+                    
+                    <input type="password" id="password" name="password" required class="input-control">
+                </div>
+                <div class="form-wrapper">
+                    <div class="input-group_2">
+                        <input type="checkbox" name="remember-me" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <div class="forgot-password-wrapper">
+                        <small><a href="./forgotpassword.html">Forgot Password?</a></small>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <button type="submit" class="btn long-btn primary-btn big-btn">Login</button>
+                </div>
+                
+                <p class="center">
+                    <small>Don't yet have an account? <a href="signup.html">Sign Up</a></small>
+                </p>
+            </form>
             
-            <div class="input-group">
-                <button type="submit" class="btn long-btn primary-btn big-btn">Login</button>
-            </div>
-            <p class="center">
-                <small>Don't yet have an account? <a href="register.html">Sign Up</a></small>
-            </p>
-        </form>
-        
-    </div>
+        </div>
 
-    <script src="static/script.js"></script>
-</body>
+        {% endblock %}
+    </body>
 </html>
