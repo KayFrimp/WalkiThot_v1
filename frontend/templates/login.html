@@ -8,7 +8,7 @@
     {% block content %}
     
         <div class="containerlogin">
-            <form action="#" method="post" class="admin-form auth-form">
+            <form action="{{ url_for('login_data')}}" method="post" class="admin-form auth-form">
                 <h1 class="center form=title">Login</h1>
     
                 <div class="input-group">

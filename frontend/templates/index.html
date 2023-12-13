@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}">
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ url_for('static',   filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',   filename='css/loginstyles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',   filename='css/writestyles.css') }}">
 </head>
 <body>
     <!-- Header -->
@@ -37,10 +39,11 @@
                         <a href="{{ url_for('write') }}"  class="list-link">Write</a>
                     </li>
                     <li class="list-item screen-lg-hidden">
-                        <a href="{{ url_for('login') }}"  class="list-link">Log in</a>
+                        <a href="{{ url_for('login') }}" class="list-link">Log in</a>
                     </li>
                     <li class="list-item screen-lg-hidden">
-                        <a href="./signup.html" class="list-link">Sign up</a>
+                        <a href="{{url_for('signup') }}" class="list-link">Sign up</a> 
+                    <!-- </a>/signup.html" class="list-link">Sign up</a> -->
                     </li>
                 </ul>
             </div>
@@ -60,8 +63,8 @@
                     <i class="ri-close-line close-menu-icon"></i>
                 </button>
 
-                <a href="./login.html" class="list-link screen-sm-hidden">Log in</a>
-                <a href="./signup.html" class="btn sign-up-btn fancy-border screen-sm-hidden">
+                <a href="{{ url_for('login') }}" class="list-link screen-sm-hidden">Log in</a>
+                <a href="{{url_for('signup') }}" class="btn sign-up-btn fancy-border screen-sm-hidden">
                     <span>Sign up</span>
                 </a>
             </div>
