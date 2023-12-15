@@ -1,4 +1,4 @@
-# Walkithot - Let your thoughts walk
+# Walkithot - (et your thoughts walk)
 This repository contains the project done by 2 friends titled Walkithot. It is a blog website aimed at helping to bridge the gap of knowledge and information among ALX students and other tech enthusiast and was done as part of the requirements for graduating in ALX. This project implements a frontend interface for smooth user experience, backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 #### Functionalities of this command interpreter:
