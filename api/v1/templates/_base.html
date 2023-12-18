@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walkithot | Home</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon.png">
+    <!-- Remix icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Swiper.js styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{{ url_for('static',   filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',   filename='css/loginstyles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',   filename='css/writestyles.css') }}">
+</head>
+
+<body>
+
+    {% include "navbar.html" %}
+
+    <div class="container">
+        <br>
+
+        <!-- messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- child template -->
+        {% block content %}{% endblock %}
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer section">
+
+        <div class="footer-container container d-grid">
+
+            <div class="company-data">
+                <a href="./index.html">
+                    <h2 class="logo">Walkithot</h2>
+                </a>
+                <p class="company-description">Walkithot is a blog post specifically designed for ALX student however
+                    every tech enthusiast can find it useful.</p>
+
+                <ul class="list social-media">
+                    <li class="list-item">
+                        <a href="#" class="list-link"><i class="ri-instagram-line"></i></a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link"><i class="ri-facebook-circle-line"></i></a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link"><i class="ri-twitter-line"></i></a>
+                    </li>
+                </ul>
+
+                <span class="copyright-notice">&copy;2023 Walkithot. All rights reserved.</span>
+            </div>
+
+            <div>
+                <h6 class="title footer-title">Categories</h6>
+
+                <ul class="footer-list list">
+                    <li class="list-item">
+                        <a href="#" class="list-link">AI&ML</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Trends</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Technology</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Enterpreneurship</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">IOT</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Data</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h6 class="title footer-title">Useful links</h6>
+
+                <ul class="footer-list list">
+                    <li class="list-item">
+                        <a href="./index.html" class="list-link">Home</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./about.html" class="list-link">About</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Tags</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="https://github.com/KayFrimp/WalkiThot_v1" target="_blank"
+                            class="list-link">GithubRepo</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- <div>
+                <h6 class="title footer-title">Company</h6>
+                
+                <ul class="footer-list list">
+                    <li class="list-item">
+                        <a href="#" class="list-link">Contact us</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">F.A.Q</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Careers</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Authors</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#" class="list-link">Memberships</a>
+                    </li>
+                </ul>
+
+            </div> -->
+
+        </div>
+
+    </footer>
+
+    <!-- Swiper.js -->
+    <script src="../static/script/swiper-bundle.min.js"></script>
+    <!-- Custom script -->
+    <script src="../static/script/main.js"></script>
+
+</body>
+
+</html>

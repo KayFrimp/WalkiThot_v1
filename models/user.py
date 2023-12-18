@@ -1,14 +1,20 @@
 #!venv/bin/python3
 """ This is a user class definition """
-import hashlib
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import mapped_column, relationship
 import models
 from models.base_model import Base, BaseModel
 from models.blog import Blog
+from api.v1.app import bcrypt
+"""UserMixin class implements:
+    is_authenticated (boolean): authenticated user
+    is_active (boolean): active user
+    is_anonymous (boolean): anonymous user
+    get_id() (string): user id"""
+from flask_login import UserMixin
 
 
-class User(BaseModel, Base):
+class User(UserMixin, BaseModel, Base):
     """ user class definition with the needed attribute """
     if models.storage_t == 'db':
         __tablename__ = 'users'
@@ -39,7 +45,9 @@ class User(BaseModel, Base):
             return blog_list
 
     def __setattr__(self, key, value):
-        """Sets user password with MD5 Hashing"""
+        """Sets user password with Bcrypt"""
         if key == 'password':
-            value = hashlib.md5(value.encode()).hexdigest()
+            # value = hashlib.md5(value.encode()).hexdigest()
+            value = bcrypt.generate_password_hash(value)
         super().__setattr__(key, value)
+

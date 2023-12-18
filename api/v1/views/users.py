@@ -1,9 +1,56 @@
 #!venv/bin/python3
 """USER RESTFul API Definitions"""
-from flask import abort, jsonify, request
+from flask import abort, flash, jsonify, redirect, render_template, request, url_for
 from api.v1.views import app_views
+from flask_login import current_user, login_required, login_user, logout_user
+from api.v1.forms.user_account_forms import LoginForm, RegisterForm
+from api.v1.app import bcrypt
 from models import storage
 from models.user import User
+
+
+# Added the view for Registering a user
+@app_views.route('/register', methods=["GET", "POST"], strict_slashes=False)
+def register():
+    if current_user.is_authenticated:
+        flash("You are already logged in.", "info")
+        return redirect(url_for("home"))
+    form = RegisterForm(request.form)
+    if form.validate_on_submit():
+        user = User(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            email=form.email.data,
+            cohort=form.cohort.data,
+            password=form.password.data
+        )
+        storage.new(user)
+        storage.save(user)
+
+        login_user(user)
+        flash("You registered and are now logged in. Welcome!", "success")
+
+        return redirect(url_for("home"))
+    return render_template("/register.html", form=form)
+
+
+# Added the view for User Login
+@app_views.route("/login", methods=["GET", "POST"], strict_slashes=False)
+def login():
+    if current_user.is_authenticated:
+        flash("You are already logged in.", "info")
+        return redirect(url_for("home"))
+    form = LoginForm(request.form)
+    if form.validate_on_submit():
+        users = [user for user in storage.all(User).values() if user.email == form.email.data]
+        user = users[0] if users else None
+        if user and bcrypt.check_password_hash(user.password, request.form["password"]):
+            login_user(user)
+            return redirect(url_for("home"))
+        else:
+            flash("Invalid email and/or password.", "danger")
+            return render_template("/login.html", form=form)
+    return render_template("/login.html", form=form)
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
@@ -67,3 +114,11 @@ def update_user(user_id):
             setattr(user, key, value)
         user.save()
         return jsonify(user.to_dict()), 200
+
+
+@app_views.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("You were logged out.", "success")
+    return redirect(url_for("login"))
