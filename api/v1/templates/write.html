@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Walkithot | Write</title>
+
+    <!-- Include TinyMCE from CDN -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Initialize TinyMCE -->
+    <script>
+        tinymce.init({
+            selector: '#content',  // Replace 'content' with the ID of your textarea
+            height: 300,
+            plugins: 'link',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | link',
+        });
+    </script>
+</head>
+
+<body>
+    {% extends "_base.html" %}
+    {% block content %}
+
+    <div class="write_container">
+        <h1>Write a Blog Post</h1>
+        <form id="blogForm">
+            <input type="text" id="title" placeholder="Title" name="title"><br><br>
+            <hr class="styled-line">
+            <!-- Replace the textarea with TinyMCE editor -->
+            <textarea id="content" name="content" placeholder="Write your blog" rows="8" cols="50"></textarea><br><br>
+        </form>
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>

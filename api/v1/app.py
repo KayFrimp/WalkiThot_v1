@@ -3,7 +3,10 @@
 import os
 from flask import Flask, jsonify, make_response
 from flask_login import LoginManager
-
+from api.v1.views import app_views
+from api.v1.views.index import core_bp
+from api.v1.views.account import accounts_bp
+from api.v1.views.blogs import blog_bp
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
@@ -13,13 +16,14 @@ bcrypt = Bcrypt(app)
 #Adding Login Manager
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "app_views.login"
+login_manager.login_view = "accounts.login"
 login_manager.login_message = "danger"
 
 # Registering blueprints
-from api.v1.views import app_views
-
-app.register_blueprint(app_views)
+# app.register_blueprint(app_views)
+app.register_blueprint(core_bp)
+app.register_blueprint(accounts_bp)
+app.register_blueprint(blog_bp)
 
 
 @app.teardown_appcontext

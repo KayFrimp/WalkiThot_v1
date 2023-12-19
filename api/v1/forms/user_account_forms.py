@@ -2,27 +2,27 @@
 from flask_wtf import FlaskForm
 from wtforms import EmailField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
-from models import storage
-from models.user import User
 
 
 class RegisterForm(FlaskForm):
     first_name = StringField('First Name',
-                             [DataRequired])
+                             validators=[DataRequired()])
     last_name = StringField('Last Name')
     email = EmailField('Email Address',
-                       [DataRequired(), Email(message=None), Length(min=6, max=40)])
+                       validators=[DataRequired(), Email(message=None), Length(min=6, max=40)])
     cohort = IntegerField('Cohort')
     password = PasswordField('Enter Password',
-                             [DataRequired(), Length(min=6, max=25)])
+                             validators=[DataRequired(), Length(min=6, max=25)])
     confirm = PasswordField('Repeat Password',
-                            [DataRequired(),
+                            validators=[DataRequired(),
                              EqualTo("password", message="Passwords must match.")])
     
-    def validate(self):
-        initial_validation = super(RegisterForm, self).validate()
+    def validate(self, extra_validators=None):
+        initial_validation = super(RegisterForm, self).validate(extra_validators)
         if not initial_validation:
             return False
+        from models import storage
+        from models.user import User
         users = [user for user in storage.all(User).values() if user.email == self.email]
         user = users[0] if users else None
         if user:

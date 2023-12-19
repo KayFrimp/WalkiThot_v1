@@ -1,6 +1,30 @@
 {% extends "_base.html" %}
 {% block content %}
 
-<h1 class="text-center">Welcome {{current_user.email}}!</h1>
+<div class="featured-articles section section-header-offset">
+    <div class="featured-articles-container container d-grid">
+        <div class="featured-content d-grid">
+            {% for blog in blogs %}
+            <a href="{{ url_for('core.post', blog_id=blog.id) }}"
+                class="article featured-article featured-article-1 p-5">
+                <img src="../static/images/featured/featured-1.jpg" alt="" class="article-image">
+                <span class="article-category">{{ blog.category }}</span>
+
+                <div class="article-data-container">
+
+                    <div class="article-data">
+                        <span>{{ blog.created_at }}</span>
+                        <span class="article-data-spacer"></span>
+                    </div>
+
+                    <h3 class="title article-title">{{ blog.title }}</h3>
+
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

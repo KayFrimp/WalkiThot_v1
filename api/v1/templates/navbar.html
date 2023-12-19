@@ -1,31 +1,40 @@
 <!-- Navbar -->
 <header class="header" id="header">
     <nav class="navbar container">
-        <a href="./index.html">
+        <a href="{{ url_for('core.home') }}">
             <h2 class="logo">Walkithot</h2>
         </a>
 
         <div class="menu" id="menu">
             <ul class="list">
                 <li class="list-item">
-                    <a href="{{ url_for('home') }}" class="list-link current">Home</a>
+                    <a href="{{ url_for('core.home') }}" class="list-link current">Home</a>
                 </li>
                 <li class="list-item">
-                    <a href="{{ url_for('about') }}" class="list-link">About</a>
+                    <a href="{{ url_for('core.about') }}" class="list-link">About</a>
                 </li>
                 <li class="list-item">
                     <a href="https://github.com/KayFrimp/WalkiThot_v1" target="_blank" class="list-link">Github Repo</a>
                 </li>
+                {% if current_user.is_authenticated %}
                 <li class="list-item">
-                    <a href="{{ url_for('write') }}" class="list-link">Write</a>
+                    <a href="{{ url_for('blogs.write') }}" class="list-link">Write</a>
+                </li>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <li class="list-item screen-lg-hidden">
+                    <a href="{{ url_for('accounts.logout') }}"><button type="button"
+                            class="btn btn-danger me-2">Logout</button></a>
+                </li>
+                {% else %}
+                <li class="list-item screen-lg-hidden">
+                    <a href="{{ url_for('accounts.login') }}" class="list-link">Log in</a>
                 </li>
                 <li class="list-item screen-lg-hidden">
-                    <a href="{{ url_for('app_views.login') }}" class="list-link">Log in</a>
-                </li>
-                <li class="list-item screen-lg-hidden">
-                    <a href="{{url_for('app_views.register') }}" class="list-link">Sign up</a>
+                    <a href="{{url_for('accounts.register') }}" class="list-link">Sign up</a>
                     <!-- </a>/signup.html" class="list-link">Sign up</a> -->
                 </li>
+                {% endif %}
             </ul>
         </div>
 
@@ -43,11 +52,16 @@
                 <i class="ri-menu-3-line open-menu-icon"></i>
                 <i class="ri-close-line close-menu-icon"></i>
             </button>
-
-            <a href="{{ url_for('app_views.login') }}" class="list-link screen-sm-hidden">Log in</a>
-            <a href="{{url_for('app_views.register') }}" class="btn sign-up-btn fancy-border screen-sm-hidden">
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('accounts.logout') }}"><button type="button"
+                    class="btn btn-danger me-2">Logout</button></a>
+            {% else %}
+            <a href="{{ url_for('accounts.login') }}" class="list-link screen-sm-hidden">Log in</a>
+            <a href="{{url_for('accounts.register') }}" class="btn sign-up-btn fancy-border screen-sm-hidden">
                 <span>Sign up</span>
             </a>
+            {% endif %}
+
         </div>
 
     </nav>
