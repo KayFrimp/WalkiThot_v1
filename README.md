@@ -1,4 +1,4 @@
-# Walkithot - (et your thoughts walk)
+# Walkithot - (Let your thoughts walk)
 This repository contains the project done by 2 friends titled Walkithot. It is a blog website aimed at helping to bridge the gap of knowledge and information among ALX students and other tech enthusiast and was done as part of the requirements for graduating in ALX. This project implements a frontend interface for smooth user experience, backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 #### Functionalities of this command interpreter:
@@ -25,6 +25,7 @@ This project is interpreted/tested on wsl Ubuntu 22.04 LTS using python3 (versio
 * Access Walkithot directory: `cd AirBnB_clone`
 * Run walkithot(interactively): `./console` and enter command
 * Run walkithot(non-interactively): `echo "<command>" | ./console.py`
+* Run walkithot with a mysql database: ` WALKI_MYSQL_USER=walki_dev WALKI_MYSQL_PWD=walki_dev_pwd WALKI_MYSQL_HOST=localhost WALKI_MYSQL_DB=walki_dev_db WALKI_TYPE_STORAGE=db WALKI_API_HOST=0.0.0.0 WALKI_API_PORT=5000 python3 -m api.v1.app`
 * The application should now be accessible at http://localhost:5000.
 Contributing
 * We welcome contributions! If you'd like to contribute to the WalkiThot project, please follow these steps:
